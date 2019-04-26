@@ -21,6 +21,7 @@ import java.util.List;
 
 import administrator.example.com.energy.Adapter.equipmentAdapter;
 import administrator.example.com.energy.gson.equipment;
+import administrator.example.com.energy.util.GsonUtil;
 import administrator.example.com.energy.util.HttpUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -84,8 +85,10 @@ public class ListActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 // 得到服务器返回的具体内容
                 Log.d("MainActivity", "3 ");
-                String responseData = response.body().string();
-                parseJSONWithGSON(responseData);
+                String responseData = response.body().string();//得到response中的json数据
+                equipmentList= (List<equipment>) GsonUtil.handleequ(responseData);
+                showResponse();
+                //parseJSONWithGSON(responseData);
             }
         });
     }
@@ -93,7 +96,7 @@ public class ListActivity extends AppCompatActivity {
       private void parseJSONWithGSON(String jsonData) {
             Gson gson = new Gson();
           Log.d("MainActivity", "4 ");
-            equipmentList = gson.fromJson(jsonData, new TypeToken<List<equipment>>() {}.getType());
+            equipmentList = gson.fromJson(jsonData, new TypeToken<List<equipment>>() {}.getType());//将Json数据解析成equipment类的数组
             for (equipment equ : equipmentList) {
                 Log.d("MainActivity", "no is " + equ.getno());
                 Log.d("MainActivity", "data is " + equ.getdata());
@@ -105,6 +108,7 @@ public class ListActivity extends AppCompatActivity {
 
         private void showResponse()
         {
+            //开启子线程显示ui
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

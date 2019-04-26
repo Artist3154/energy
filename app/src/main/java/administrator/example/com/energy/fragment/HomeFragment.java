@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
     private LineChartView lineChart;
 
     //横坐标与数据点数组
-    String[] date = {"10-22","11-22","12-22","1-22","6-22","5-23","5-22","6-22","5-23","5-22"};//X轴的标注
+    String[] date = {"4-17","4-18","4-19","4-20","4-21","4-22","4-23","4-24","4-25","4-26"};//X轴的标注
     int[] score= {50,42,90,33,10,74,22,18,79,20};//图表的数据点
     private List<PointValue> mPointValues = new ArrayList<PointValue>();
     private List<AxisValue> mAxisXValues = new ArrayList<AxisValue>();

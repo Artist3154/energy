@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-       >
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,12 +19,42 @@
             android:textSize="20sp"
             android:text="用电分析"/>
     </android.support.v7.widget.Toolbar>
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:targetApi="jelly_bean_mr1" />
+
     <TextView
-        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="用电分析"
+        android:layout_gravity="center"
         android:textSize="20sp"
-        android:gravity="center"/>
+        android:text="每日耗电量"/>
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <View  android:layout_height="5px"
+        android:layout_width="match_parent"
+        android:background="#0000FF"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:text="电能用途分析"/>
+    <lecho.lib.hellocharts.view.PieChartView
+        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:id="@+id/pieChart"
+        android:layout_gravity="center"
+        />
+
+
 </LinearLayout>

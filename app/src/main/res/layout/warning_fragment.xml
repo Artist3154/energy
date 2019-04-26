@@ -19,12 +19,94 @@
             android:textSize="20sp"
             android:text="用能告警"/>
     </android.support.v7.widget.Toolbar>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <lecho.lib.hellocharts.view.PieChartView
+            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:id="@+id/pieChart"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="已处理：30"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="未处理：10"/>
+    </LinearLayout>
+
+    <View  android:layout_height="5px"
+        android:layout_width="match_parent"
+        android:background="#0000FF"
+        />
+
     <TextView
-        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="用能告警"
         android:textSize="20sp"
-        android:gravity="center"/>
+        android:text="告警统计"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:text="设备号"/>
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="名称"/>
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="时间"/>
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="告警原因"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
+
 </LinearLayout>

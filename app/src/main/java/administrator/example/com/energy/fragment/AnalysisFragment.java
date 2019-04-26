@@ -3,6 +3,7 @@ package administrator.example.com.energy.fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,8 +21,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import administrator.example.com.energy.LoginActivity;
 import administrator.example.com.energy.R;
+import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.PieChartView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +51,19 @@ public class AnalysisFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Toolbar toolbar;
+
+    private PieChartView pieChart;     //饼状图View
+    private PieChartData data;         //存放数据
+
+
+    private boolean hasLabels = true;                   //是否有标语
+    private boolean hasLabelsOutside = false;           //扇形外面是否有标语
+    private boolean hasCenterCircle = false;            //是否有中心圆
+    private boolean hasCenterText1 = false;             //是否有中心的文字
+    private boolean hasCenterText2 = false;             //是否有中心的文字2
+    private boolean isExploded = false;                  //是否是炸开的图像
+    private boolean hasLabelForSelected = false;         //选中的扇形显示标语
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -81,6 +104,10 @@ public class AnalysisFragment extends Fragment {
        // toolbar.inflateMenu((R.menu.toolbar));
         ActionBar actionBar=((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("");
+
+        pieChart=view.findViewById(R.id.pieChart);
+        pieChart.setOnValueTouchListener(new ValueTouchListener());
+        generateData();
         return view;
     }
 
@@ -189,4 +216,57 @@ public class AnalysisFragment extends Fragment {
         }
         return true;
     }
+
+    private void generateData() {
+        int numValues = 6;   //扇形的数量
+        String[] equ = {"冰箱","空调","电风扇","热水器","地暖","机器人"};
+        //存放扇形数据的集合
+        //设置弧度数和弧度显示文字的关键代码
+        List<SliceValue> values = new ArrayList<SliceValue>();
+        for (int i = 0; i < numValues; ++i) {
+            SliceValue sliceValue = new SliceValue((float) Math.random() * 30 + 15, ChartUtils.pickColor());
+            sliceValue.setLabel(equ[i]); //设置扇形显示的文字
+            values.add(sliceValue);
+        }
+
+        data = new PieChartData(values);
+        data.setHasLabels(hasLabels);
+        data.setHasLabelsOnlyForSelected(hasLabelForSelected);
+        data.setHasLabelsOutside(hasLabelsOutside);
+        data.setHasCenterCircle(hasCenterCircle);
+
+        if (isExploded) {
+            data.setSlicesSpacing(24);
+        }
+
+        if (hasCenterText1) {
+            data.setCenterText1("Hello!");//设置中心文字
+
+        }
+
+        if (hasCenterText2) {
+            data.setCenterText2("Charts (Roboto Italic)");
+
+        }
+        pieChart.setPieChartData(data);//为饼图设置数据
+    }
+
+
+    /**
+     * 点击监听
+     */
+    private class ValueTouchListener implements PieChartOnValueSelectListener {
+
+        @Override
+        public void onValueSelected(int arcIndex, SliceValue value) {
+            Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onValueDeselected() {
+
+        }
+
+    }
+
 }

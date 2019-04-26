@@ -15,14 +15,14 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00FF00">
+        android:background="#ffffff">
         <TextView
             android:id="@+id/no"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:text="设备号"/>
         <TextView
             android:id="@+id/data"
@@ -30,25 +30,29 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="数据"/>
+            android:textSize="20sp"
+            android:text="名称"/>
         <TextView
             android:id="@+id/value"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="阈值差"/>
+            android:textSize="20sp"
+            android:text="实时功率"/>
         <TextView
             android:id="@+id/state"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="状态"/>
+            android:textSize="20sp"
+            android:text="总消耗量"/>
     </LinearLayout>
+    <View  android:layout_height="5px"
+        android:layout_width="match_parent"
+        android:background="#0000FF"
+        />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
