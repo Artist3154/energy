@@ -74,7 +74,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void sendRequestWithOKHttp() {
-        HttpUtil.sendOkHttpRequest("http://192.168.155.3/equipment.json", new Callback() {
+        HttpUtil.sendOkHttpRequest("http://192.168.155.3:9099/rua", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 // 在这里对异常情况进行处理
@@ -86,9 +86,10 @@ public class ListActivity extends AppCompatActivity {
                 // 得到服务器返回的具体内容
                 Log.d("MainActivity", "3 ");
                 String responseData = response.body().string();//得到response中的json数据
-                equipmentList= (List<equipment>) GsonUtil.handleequ(responseData);
-                showResponse();
-                //parseJSONWithGSON(responseData);
+                //equipmentList= (List<equipment>) GsonUtil.handleequ(responseData);
+
+                //showResponse();
+                parseJSONWithGSON(responseData);
             }
         });
     }
@@ -98,25 +99,25 @@ public class ListActivity extends AppCompatActivity {
           Log.d("MainActivity", "4 ");
             equipmentList = gson.fromJson(jsonData, new TypeToken<List<equipment>>() {}.getType());//将Json数据解析成equipment类的数组
             for (equipment equ : equipmentList) {
-                Log.d("MainActivity", "no is " + equ.getno());
-                Log.d("MainActivity", "data is " + equ.getdata());
-                Log.d("MainActivity", "value is " + equ.getvalue());
-                Log.d("MainActivity", "state is " + equ.getstate());
+                Log.d("MainActivity", "no is " + equ.getid());
+                Log.d("MainActivity", "data is " + equ.getname());
+                Log.d("MainActivity", "value is " + equ.getpower());
+                Log.d("MainActivity", "state is " + equ.getenergy());
             }
           showResponse();
         }
 
-        private void showResponse()
-        {
-            //开启子线程显示ui
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                adapter = new equipmentAdapter(equipmentList);//将初始化好的equipmentList传入适配器
-                Log.d("MainActivity", "5 ");
-                recyclerView.setAdapter(adapter);
-                }
-            });
+            private void showResponse()
+            {
+                //开启子线程显示ui
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter = new equipmentAdapter(equipmentList);//将初始化好的equipmentList传入适配器
+                        Log.d("MainActivity", "5 ");
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
         }
     /*private void initequipment() {
         for(int i=0;i<4;i++) {

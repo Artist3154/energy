@@ -51,7 +51,7 @@ public class equipmentAdapter extends RecyclerView.Adapter<equipmentAdapter.View
             {
                 int position=holder.getAdapterPosition();
                 equipment equ=mequipmentList.get(position);
-                Toast.makeText(v.getContext(),"you clicked view"+equ.getno(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"you clicked view"+equ.getid(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(),MessageActivity.class);
                 v.getContext().startActivity(intent);
 
@@ -63,10 +63,10 @@ public class equipmentAdapter extends RecyclerView.Adapter<equipmentAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         equipment equ = mequipmentList.get(position);
-        holder.equno.setText(equ.getno());
-        holder.equdata.setText(equ.getdata()+" ");
-        holder.equvalue.setText(equ.getvalue()+" ");
-        holder.equstate.setText(equ.getstate());
+        holder.equno.setText(equ.getid()+" ");
+        holder.equdata.setText(equ.getname());
+        holder.equvalue.setText(equ.getpower());
+        holder.equstate.setText(equ.getenergy());
     }
 
     @Override

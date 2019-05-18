@@ -1,32 +1,43 @@
 package administrator.example.com.energy.gson;
 
+import java.sql.Date;
+
 public class equipment {
-    private String no;
-    private int data;
-    private int value;
-    private String state;
-    public equipment(String no,int data,int value,String state)
+    private int id;
+    private String name;
+    private Date date;
+    private String current;
+    private String voltage;
+    private String power;
+    private String energy;
+    public equipment(int id,String name,Date date,String current,String voltage,String power,String energy)
     {
-        this.no=no;
-        this.data=data;
-        this.value=value;
-        this.state=state;
+        this.id=id;
+        this.name=name;
+        this.date=date;
+        this.current=current;
+        this.voltage=voltage;
+        this.power=power;
+        this.energy=energy;
     }
 
-    public String getno()
+    public int getid()
     {
-        return no;
+        return id;
     }
-    public int getdata()
+    public String getname()
     {
-        return data;
+        return name;
     }
-    public int getvalue()
+    public Date getdate(){return date;}
+    public String getcurrent(){return current;}
+    public String getvoltage(){return voltage;}
+    public String getpower()
     {
-        return value;
+        return power;
     }
-    public String getstate()
+    public String getenergy()
     {
-        return state;
+        return energy;
     }
 }

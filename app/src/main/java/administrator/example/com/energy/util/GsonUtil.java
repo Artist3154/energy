@@ -18,6 +18,7 @@ public class GsonUtil {
         try {
             Gson gson = new Gson();
             return gson.fromJson(jsonData, new TypeToken<List<equipment>>() {}.getType());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package administrator.example.com.energy;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText nameedit;
     private EditText passwordedit;
@@ -39,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //sendCode(this);
         nameedit = (EditText) findViewById(R.id.username);
         passwordedit = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
@@ -187,5 +195,27 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+    //使用官方mob图形化界面
+    /*public void sendCode(Context context) {
+        RegisterPage page = new RegisterPage();
+        //如果使用我们的ui，没有申请模板编号的情况下需传null
+        page.setTempCode(null);
+        page.setRegisterCallback(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    // 处理成功的结果
+                    HashMap<String,Object> phoneMap = (HashMap<String, Object>) data;
+                    String country = (String) phoneMap.get("country"); // 国家代码，如“86”
+                    String phone = (String) phoneMap.get("phone"); // 手机号码，如“13800138000”
+                    // TODO 利用国家代码和手机号码进行后续的操作
+                } else{
+                    // TODO 处理错误的结果
+                }
+            }
+        });
+        page.show(context);
+    }*/
 
 }

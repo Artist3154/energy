@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import administrator.example.com.energy.ListActivity;
+import administrator.example.com.energy.Login2Activity;
 import administrator.example.com.energy.LoginActivity;
 import administrator.example.com.energy.MainActivity;
 import administrator.example.com.energy.R;
@@ -226,7 +227,7 @@ public class HomeFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which)
                     {
                         Toast.makeText(getActivity(),"下线成功", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(getActivity(),LoginActivity.class);
+                        Intent intent=new Intent(getActivity(),Login2Activity.class);
                         startActivity(intent);
 
                     }
