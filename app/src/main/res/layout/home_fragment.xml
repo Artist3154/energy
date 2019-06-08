@@ -22,62 +22,77 @@
                     android:text="能源管理"/>
             </android.support.v7.widget.Toolbar>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="80dp">
 
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="实时数据"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="运行概览"
-                android:textSize="20sp"
-                android:gravity="center"/>
+        <Button
+            android:id="@+id/con"
+            style="?android:textAppearanceSmall"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="连接"
+            android:textStyle="bold" />
+            <Button
+                android:id="@+id/reflash"
+                style="?android:textAppearanceSmall"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginTop="16dp"
+                android:text="更新"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/dis"
+                style="?android:textAppearanceSmall"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginTop="16dp"
+                android:text="断开"
+                android:textStyle="bold" />
+    </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="horizontal" android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="60dp">
+
                 <TextView
+                    android:id="@+id/MessageView"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18sp"
-                    android:text="电表上线/总：8/10"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:text="本月重复告警：2"/>
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal" android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="50dp"
                     android:gravity="center"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/currentView"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
                     android:textSize="18sp"
-                    android:text="本月告警/总告警：5/11"/>
+                    android:gravity="center"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/energyView"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+
 
             </LinearLayout>
-
-
-
-    <View  android:layout_height="5px"
-        android:layout_width="match_parent"
-        android:background="#0000FF"
-
-        />
-
-
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="horizontal" android:layout_width="match_parent"
@@ -101,76 +116,31 @@
                     android:text="电表详情"/>
 
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal" android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="今日耗能： "/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="本月耗能： "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="上月耗能： "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="总耗能： "/>
-
-            </LinearLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:text="今日耗能"/>
 
             <lecho.lib.hellocharts.view.LineChartView
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="140dp" />
 
-
-    <View  android:layout_height="5px"
-        android:layout_width="match_parent"
-        android:background="#0000FF"
-
-        />
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal" android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="今日耗能： "/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="本月耗能： "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="上月耗能： "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="总耗能： "/>
-
-            </LinearLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:text="本周耗能 "/>
 
             <lecho.lib.hellocharts.view.LineChartView
                 android:id="@+id/chart2"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="140dp" />
         </LinearLayout>
 
 

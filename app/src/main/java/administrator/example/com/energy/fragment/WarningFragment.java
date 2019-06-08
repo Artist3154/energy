@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import java.util.List;
 
 import administrator.example.com.energy.Adapter.alarmlogAdapter;
 import administrator.example.com.energy.Adapter.equipmentAdapter;
+import administrator.example.com.energy.ListActivity;
 import administrator.example.com.energy.LoginActivity;
 import administrator.example.com.energy.R;
 import administrator.example.com.energy.gson.alarmlog;
@@ -62,6 +64,7 @@ public class WarningFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<alarmlog> alarmlogList = new ArrayList<alarmlog>();
     private alarmlogAdapter adapter;
+    private ImageView img;
 
     private OnFragmentInteractionListener mListener;
 
@@ -105,6 +108,17 @@ public class WarningFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        img=view.findViewById(R.id.call);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                Uri data = Uri.parse("tel:" + "15957171385");
+                intent.setData(data);
+                startActivity(intent);
+            }
+        });
 
         sendRequestWithOKHttp();
 
@@ -219,7 +233,7 @@ public class WarningFragment extends Fragment {
 
 
     private void sendRequestWithOKHttp() {
-        HttpUtil.sendOkHttpRequest("http://192.168.155.3:9099/hello", new Callback() {
+        HttpUtil.sendOkHttpRequest("http://118.25.155.108:9099/hello", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 // 在这里对异常情况进行处理

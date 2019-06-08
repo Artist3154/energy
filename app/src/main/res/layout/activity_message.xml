@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -8,63 +9,104 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="返回"
+        android:text="Back"
         android:textSize="20sp"
         android:gravity="center"/>
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:targetApi="jelly_bean_mr1" />
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="设备详情"
+            android:textSize="24sp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/MessageView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="id:1"
+        android:layout_weight="1"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/currentView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="name:空压机"
+        android:textSize="20sp" />
+
+</LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/no"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:text="current:10A"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:textSize="24sp"
-            android:text="设备号:001"/>
+            android:textSize="20sp" />
         <TextView
-            android:id="@+id/data"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
+            android:gravity="center"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="实时功率:10W"/>
+            android:text="voltage:220V"
+            android:textSize="20sp" />
+
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
 
-        >
         <TextView
-            android:id="@+id/value"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:text="power:2200W"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="阈值差：+1"/>
+            android:textSize="20sp" />
         <TextView
-            android:id="@+id/state"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
+            android:gravity="center"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="状态：正常"/>
+            android:text="energy:30kJ"
+            android:textSize="20sp" />
+
     </LinearLayout>
+
+
+
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00FF00">
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="24sp"

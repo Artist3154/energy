@@ -5,12 +5,12 @@ import java.sql.Date;
 public class equipment {
     private int id;
     private String name;
-    private Date date;
+    private String date;
     private String current;
     private String voltage;
     private String power;
     private String energy;
-    public equipment(int id,String name,Date date,String current,String voltage,String power,String energy)
+    public equipment(int id,String name,String date,String current,String voltage,String power,String energy)
     {
         this.id=id;
         this.name=name;
@@ -29,7 +29,7 @@ public class equipment {
     {
         return name;
     }
-    public Date getdate(){return date;}
+    public String getdate(){return date;}
     public String getcurrent(){return current;}
     public String getvoltage(){return voltage;}
     public String getpower()

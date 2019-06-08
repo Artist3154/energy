@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,7 +18,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
+import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
@@ -29,20 +32,11 @@ public class MessageActivity extends AppCompatActivity {
 
 
     private Button back;
-
-    private LineChartView mChartView;
-    private List<PointValue> values;
-    private List<Line> lines;
-    private LineChartData lineChartData;
-    private LineChartView lineChartView;
-    private List<Line> linesList;
-    private List<PointValue> pointValueList;
-    private List<PointValue> points;
-    private int position = 0;
-    private Timer timer;
-    private boolean isFinish = true;
-    private Axis axisY, axisX;
-    private Random random = new Random();
+    private LineChartView lineChart;
+    String[] day={"6-1","6-2","6-3","6-4","6-5","6-6","6-7"};
+    int [] score={1000,1200,800,789,923,873,1011};
+    private List<PointValue> mPointValues = new ArrayList<PointValue>();
+    private List<AxisValue> mAxisXValues = new ArrayList<AxisValue>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,113 +52,79 @@ public class MessageActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        mChartView = (LineChartView) findViewById(R.id.chart);
-
-        initView();
-        timer = new Timer();
+        lineChart = findViewById(R.id.chart);
+        getAxisXLables();//获取x轴的标注
+        //获取坐标点
+        getAxisPoints();
+        initLineChart();
     }
 
-    protected void onResume() {
-        super.onResume();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                //实时添加新的点
-                PointValue value1 = new PointValue(position * 5, random.nextInt(100) + 40);
-                value1.setLabel("00:00");
-                pointValueList.add(value1);
+    private void getAxisXLables() {
+        for (int i = 0; i < day.length; i++) {
+            mAxisXValues.add(new AxisValue(i).setLabel(day[i]));
+        }
 
-                float x = value1.getX();
-                //根据新的点的集合画出新的线
-                Line line = new Line(pointValueList);
-                line.setColor(Color.RED);
-                line.setShape(ValueShape.CIRCLE);
-                line.setCubic(true);//曲线是否平滑，即是曲线还是折线
-
-                linesList.clear();
-                linesList.add(line);
-                lineChartData = initDatas(linesList);
-                lineChartView.setLineChartData(lineChartData);
-                //根据点的横坐实时变幻坐标的视图范围
-                Viewport port;
-                if (x > 50) {
-                    port = initViewPort(x - 50, x);
-                } else {
-                    port = initViewPort(0, 50);
-                }
-                lineChartView.setCurrentViewport(port);//当前窗口
-
-                Viewport maPort = initMaxViewPort(x);
-                lineChartView.setMaximumViewport(maPort);//最大窗口
-                position++;
-            }
-        }, 300, 300);
-    }
-
-    private void initView() {
-        lineChartView = (LineChartView) findViewById(R.id.chart);
-        pointValueList = new ArrayList<>();
-        linesList = new ArrayList<>();
-
-        //初始化坐标轴
-        axisY = new Axis();
-        //添加坐标轴的名称
-        axisY.setLineColor(Color.parseColor("#aab2bd"));
-        axisY.setTextColor(Color.parseColor("#aab2bd"));
-        axisX = new Axis();
-        axisX.setLineColor(Color.parseColor("#aab2bd"));
-        lineChartData = initDatas(null);
-        lineChartView.setLineChartData(lineChartData);
-
-        Viewport port = initViewPort(0, 50);
-        lineChartView.setCurrentViewportWithAnimation(port);
-        lineChartView.setInteractive(false);
-        lineChartView.setScrollEnabled(true);
-        lineChartView.setValueTouchEnabled(true);
-        lineChartView.setFocusableInTouchMode(true);
-        lineChartView.setViewportCalculationEnabled(false);
-        lineChartView.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL);
-        lineChartView.startDataAnimation();
-        points = new ArrayList<>();
-    }
-
-
-    private LineChartData initDatas(List<Line> lines) {
-        LineChartData data = new LineChartData(lines);
-        data.setAxisYLeft(axisY);
-        data.setAxisXBottom(axisX);
-        return data;
     }
 
     /**
-     * 当前显示区域
-     *
-     * @param left
-     * @param right
-     * @return
+     * 图表的每个点的显示
      */
-    private Viewport initViewPort(float left, float right) {
-        Viewport port = new Viewport();
-        port.top = 150;
-        port.bottom = 0;
-        port.left = left;
-        port.right = right;
-        return port;
+    private void getAxisPoints() {
+
+        for (int i = 0; i < score.length; i++) {
+            Log.d("aaa", "score is" + score[i]);
+            mPointValues.add(new PointValue(i, score[i]));
+        }//getAxisPoints();
     }
 
-    /**
-     * 最大显示区域
-     *
-     * @param right
-     * @return
-     */
-    private Viewport initMaxViewPort(float right) {
-        Viewport port = new Viewport();
-        port.top = 150;
-        port.bottom = 0;
-        port.left = 0;
-        port.right = right + 50;
-        return port;
+    private void initLineChart() {
+        Line line = new Line(mPointValues).setColor(Color.parseColor("#FFCD41"));  //折线的颜色（橙色）
+        List<Line> lines = new ArrayList<Line>();
+        line.setShape(ValueShape.CIRCLE);//折线图上每个数据点的形状  这里是圆形 （有三种 ：ValueShape.SQUARE  ValueShape.CIRCLE  ValueShape.DIAMOND）
+        line.setCubic(false);//曲线是否平滑，即是曲线还是折线
+        line.setFilled(false);//是否填充曲线的面积
+        //line.setHasLabels(true);//曲线的数据坐标是否加上备注
+        line.setHasLabelsOnlyForSelected(true);//点击数据坐标提示数据（设置了这个line.setHasLabels(true);就无效）
+        line.setHasLines(true);//是否用线显示。如果为false 则没有曲线只有点显示
+        line.setHasPoints(true);//是否显示圆点 如果为false 则没有原点只有点显示（每个数据点都是个大的圆点）
+        lines.add(line);
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
+
+        //坐标轴
+        Axis axisX = new Axis(); //X轴
+        axisX.setHasTiltedLabels(false);  //X坐标轴字体是斜的显示还是直的，true是斜的显示
+        axisX.setTextColor(Color.GRAY);  //设置字体颜色
+        axisX.setName("hour");  //表格名称
+        axisX.setTextSize(10);//设置字体大小
+        axisX.setMaxLabelChars(8); //最多几个X轴坐标，意思就是你的缩放让X轴上数据的个数7<=x<=mAxisXValues.length
+        axisX.setValues(mAxisXValues);  //填充X轴的坐标名称
+        data.setAxisXBottom(axisX); //x 轴在底部
+        //data.setAxisXTop(axisX);  //x 轴在顶部
+        axisX.setHasLines(true); //x 轴分割线
+
+        // Y轴是根据数据的大小自动设置Y轴上限(在下面我会给出固定Y轴数据个数的解决方案)
+        Axis axisY = new Axis();  //Y轴
+        axisY.setName("电能消耗");//y轴标注
+        axisY.setTextSize(10);//设置字体大小
+        data.setAxisYLeft(axisY);  //Y轴设置在左边
+        //data.setAxisYRight(axisY);  //y轴设置在右边
+
+
+        //设置行为属性，支持缩放、滑动以及平移
+        lineChart.setInteractive(true);
+        lineChart.setZoomType(ZoomType.HORIZONTAL);
+        lineChart.setMaxZoom((float) 2);//最大方法比例
+        lineChart.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL);
+        lineChart.setLineChartData(data);
+        lineChart.setVisibility(View.VISIBLE);
+        /**注：下面的7，10只是代表一个数字去类比而已
+         * 当时是为了解决X轴固定数据个数。见（http://forum.xda-developers.com/tools/programming/library-hellocharts-charting-library-t2904456/page2）;
+         */
+        Viewport v = new Viewport(lineChart.getMaximumViewport());
+        v.left = 0;
+        v.right = 7;
+        lineChart.setCurrentViewport(v);
     }
+
 }

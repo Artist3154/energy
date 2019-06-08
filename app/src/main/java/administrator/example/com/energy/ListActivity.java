@@ -74,7 +74,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void sendRequestWithOKHttp() {
-        HttpUtil.sendOkHttpRequest("http://192.168.155.3:9099/rua", new Callback() {
+        HttpUtil.sendOkHttpRequest("http://118.25.155.108:9099/rua", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 // 在这里对异常情况进行处理
@@ -118,7 +118,7 @@ public class ListActivity extends AppCompatActivity {
                         recyclerView.setAdapter(adapter);
                     }
                 });
-        }
+            }
     /*private void initequipment() {
         for(int i=0;i<4;i++) {
             equipment e1 = new equipment("001", 10, 1, "正常");

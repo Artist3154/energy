@@ -5,9 +5,9 @@ import java.sql.Date;
 public class history {
     private int id;
     private String name;
-    private float[]day;
-    private float[]hour;
-    public history(int id,String name,float[]day,float[]hour)
+    private String day;
+    private String hour;
+    public history(int id,String name,String day,String hour)
     {
         this.id=id;
         this.name=name;
@@ -22,6 +22,14 @@ public class history {
     public String getname()
     {
         return name;
+    }
+    public String getday()
+    {
+        return day;
+    }
+    public String gethour()
+    {
+        return hour;
     }
 
 }

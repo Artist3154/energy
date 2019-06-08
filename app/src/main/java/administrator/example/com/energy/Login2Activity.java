@@ -16,7 +16,7 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class Login2Activity extends AppCompatActivity implements View.OnClickListener {
-
+    private Button button;
     private Button validateNum_btn;
     private Button landing_btn;
     private EditText userName;
@@ -35,12 +35,14 @@ public class Login2Activity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initEvent(){
+        button=(Button)findViewById(R.id.button);
         userName = (EditText) findViewById(R.id.userName);
         validateNum = (EditText) findViewById(R.id.validateNum);
         validateNum_btn = (Button) findViewById(R.id.validateNum_btn);
         landing_btn = (Button) findViewById(R.id.landing_btn);
         validateNum_btn.setOnClickListener(this);
         landing_btn.setOnClickListener(this);
+        button.setOnClickListener(this);
         mTimeCount = new TimeCount(60000, 1000);
     }
 
@@ -101,6 +103,10 @@ public class Login2Activity extends AppCompatActivity implements View.OnClickLis
                 }else{
                     Toast.makeText(Login2Activity.this, "请输入手机号码", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.button:
+                Intent intent = new Intent(Login2Activity.this, MainActivity.class);
+                startActivity(intent);
                 break;
         }
     }
